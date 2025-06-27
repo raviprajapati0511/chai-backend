@@ -1,32 +1,35 @@
-import express from "express"
-import cors from "cors"
-import cookieParser from "cookie-parser"
-const app = express()
+    import express from "express"
+    import cors from "cors"
+    import cookieParser from "cookie-parser"
+    const app = express()
 
 
-app.get("/", (req, res) => {
-    res.send("API is running...");
-});
+    app.get("/", (req, res) => {
+        res.send("API is running...");
+    });
 
-app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true
-}))
+    app.use(cors({
+        origin: process.env.CORS_ORIGIN,
+        credentials: true
+    }))
 
-app.use(express.json({limit:"16kb"}))
-app.use(express.urlencoded({extended:true,limit:"16kb"}))
-app.use(express.static("public")) 
-app.use(cookieParser())
+    app.use(express.json({limit:"16kb"}))
+    app.use(express.urlencoded({extended:true,limit:"16kb"}))
+    app.use(express.static("public")) 
+    app.use(cookieParser())
 
-//routes import
+    //routes import
 
-import userRouter from './routes/user.route.js';
-
-
-// routes declaration
-app.use("/api/v1/users",userRouter)
-// http://localhost:8000/api/v1/users/register
-//http://localhost:8000api/v1/users/login
+    import userRouter from './routes/user.route.js';
 
 
-export {app}
+    // routes declaration
+    app.use("/api/v1/users",userRouter)
+    // http://localhost:8000/api/v1/users/register
+    //http://localhost:8000api/v1/users/login
+
+// app.listen(PORT, () => {
+//     console.log(`Server is running on http://localhost:${PORT}`);
+// });
+
+    export {app}
